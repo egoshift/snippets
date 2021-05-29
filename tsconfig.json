@@ -4,10 +4,18 @@
     "module": "commonjs",
     "outDir": "dist",
     "rootDir": "api", 
-    "strict": true,
     "baseUrl": "api",
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
-  }
+    "paths": {
+      "models/*": ["models/*"],
+      "controllers/*": ["controllers/*"],
+      "routes/*": ["routes/*"]
+    },
+    "forceConsistentCasingInFileNames": true,
+  },
+  "exclude": [
+    "functions/**/*",
+    "public/**/*"
+  ]
 }

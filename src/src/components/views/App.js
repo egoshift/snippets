@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import {makeStyles, ThemeProvider} from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
+import Button from '@material-ui/core/Button'
 import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography'
 import MenuItem from '@material-ui/core/MenuItem';
@@ -10,11 +11,14 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 
+import EditorJs from 'react-editor-js'
+
 import theme from '../../config/theme'
+import EDITOR_JS_TOOLS from '../../config/editorJSTools'
 
 const useStyles = makeStyles({
   app: {
-    background: theme.colors.dairyCream,
+    background: theme.colors.white,
     height: '100%',
     '& [classes*="MuiGrid-item"]': {
       height: '100%',
@@ -36,15 +40,39 @@ const useStyles = makeStyles({
     width: '100%',
   },
   snippetArea: {
-    background: 'white',
     height: '70%',
     width: '100%',
     borderRadius: 5,
+    color: 'white',
+    padding: 0,
+    '& [class*="codex-editor__redactor"]': {
+      paddingBottom: 0,
+      '& [class*="ce-block__content"]': {
+        margin: 0,
+        width: '100%',
+        maxWidth: '100%',
+      },
+    },
   },
+  editor: {
+    margin: 0
+  }
 })
 
 function App() {
   const classes = useStyles()
+
+  const data = {
+    blocks: [
+      {
+        type: "code",
+      }
+    ]
+  }
+
+  function handleOnChange(test) {
+    console.log(test)
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -71,7 +99,8 @@ function App() {
               </Grid>
             </Grid>
             <Container className={classes.snippetArea}>
-
+              <EditorJs data={data} onChange={handleOnChange} className={classes.editor} tools={EDITOR_JS_TOOLS} />
+              <Button>Save</Button>
             </Container>
           </Container>
         </Grid>
